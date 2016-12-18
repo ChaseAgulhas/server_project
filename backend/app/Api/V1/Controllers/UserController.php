@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Password;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Dingo\Api\Exception\ValidationHttpException;
 
-class AuthController extends Controller
+class UserController extends Controller
 {
     use Helpers;
+
+    public function index()
+    {
+        return User::all();
+    }
 
     public function login(Request $request)
     {
@@ -124,8 +129,5 @@ class AuthController extends Controller
                 return $this->response->error('could_not_reset_password', 500);
         }
     }
-    public function lul()
-    {
-        return "elyouel";
-    }
+    
 }

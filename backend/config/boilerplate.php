@@ -41,7 +41,7 @@ return [
     | success message.
     |
     */
-    'signup_token_release' => env('API_SIGNUP_TOKEN_RELEASE', true),
+    'signup_token_release' => env('API_SIGNUP_TOKEN_RELEASE', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -53,7 +53,7 @@ return [
     | simple success message.
     |
     */
-    'reset_token_release' => env('API_RESET_TOKEN_RELEASE', true),
+    'reset_token_release' => env('API_RESET_TOKEN_RELEASE', false),
 
     /*
     |--------------------------------------------------------------------------

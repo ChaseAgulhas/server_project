@@ -4,10 +4,11 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function ($api) {
 
-	$api->post('auth/login', 'App\Api\V1\Controllers\AuthController@login');
-	$api->post('auth/signup', 'App\Api\V1\Controllers\AuthController@signup');
-	$api->post('auth/recovery', 'App\Api\V1\Controllers\AuthController@recovery');
-	$api->post('auth/reset', 'App\Api\V1\Controllers\AuthController@reset');
+	$api->get('user', 'App\Api\V1\Controllers\UserController@index');
+	$api->post('user/login', 'App\Api\V1\Controllers\UserController@login');
+	$api->post('user/signup', 'App\Api\V1\Controllers\UserController@signup');
+	$api->post('user/recovery', 'App\Api\V1\Controllers\UserController@recovery');
+	$api->post('user/reset', 'App\Api\V1\Controllers\UserController@reset');
 
 
 	// example of protected route
@@ -16,16 +17,8 @@ $api->version('v1', function ($api) {
 	}]);
 
 	// example of free route
-	$api->get('free', function() {
+	$api->get('free', function() { 
 		return \App\User::all();
-	});
-
-	$api->group(['middleware' => 'api.auth'], function ($api) {
-		$api->get('books', 'App\Api\V1\Controllers\BookController@index');
-		$api->get('books/{id}', 'App\Api\V1\Controllers\BookController@show');
-		$api->post('books/store', 'App\Api\V1\Controllers\BookController@store');
-		$api->put('books/{id}', 'App\Api\V1\Controllers\BookController@update');
-		$api->delete('books/{id}', 'App\Api\V1\Controllers\BookController@destroy');
 	});
 
 	$api->group(['middleware' => 'api.auth'], function ($api) {
@@ -43,6 +36,16 @@ $api->version('v1', function ($api) {
 		$api->put('orders/{id}', 'App\Api\V1\Controllers\OrderController@update');
 		$api->delete('orders/{id}', 'App\Api\V1\Controllers\OrderController@destroy');
 	});
+
+	$api->group(['middleware' => 'api.auth'], function ($api) {
+		$api->post('fooditems/store', 'App\Api\V1\Controllers\FoodItemsController@store');
+		$api->get('fooditems', 'App\Api\V1\Controllers\FoodItemsController@index');
+		$api->get('fooditems/{id}', 'App\Api\V1\Controllers\FoodItemsController@show');
+		$api->put('fooditems/{id}', 'App\Api\V1\Controllers\FoodItemsController@update');
+		$api->delete('fooditems/{id}', 'App\Api\V1\Controllers\FoodItemsController@destroy');
+	});
+
+
 
 });
 

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -12,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name','surname', 'email', 'password','phoneNumber'
     ];
 
     /**
@@ -48,4 +49,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Order');
     }
+
+    public function fooditems()
+    {
+        return $this->hasMany('App\FoodItems');
+    }
+
+
 }
